@@ -1,0 +1,26 @@
+{
+  "name": "festivalmusica",
+  "version": "1.0.0",
+  "description": "Aprendiendo Sass y Gulp",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ../FestivalMusica/src/scss:build/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WalterCan/FestivalMusica.git"
+  },
+  "author": "Walter Cantero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WalterCan/FestivalMusica/issues"
+  },
+  "homepage": "https://github.com/WalterCan/FestivalMusica#readme",
+  "devDependencies": {
+    "dart-sass": "^1.25.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.45.1"
+  }
+}
