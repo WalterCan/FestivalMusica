@@ -1,8 +1,10 @@
 const { src, dest, watch } = require("gulp"); //Gulp -> Retorna multiples Funciones, por eso las llaves
-const Sass = require("gulp-sass")(require("sass")); //Gulp-sass -> Retorna solo una funcion
+const Sass = require("gulp-sass")(require("sass"));
+const plumber = require("gulp-plumber"); //Gulp-sass -> Retorna solo una funcion
 
 function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
+		.pipe(plumber())
 		.pipe(Sass()) //Compilarlo
 		.pipe(dest("../FestivalMusica/build/css")); //Almacenamos en el disco duro
 
