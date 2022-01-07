@@ -1,0 +1,21 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.video {
+	position: relative;
+	.overlay {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background: rgb(165, 2, 255);
+		background: linear-gradient(
+			270deg,
+			rgba(165, 2, 255, 0.4) 0%,
+			rgba(255, 0, 110, 0.2) 100%
+		);
+	}
+	video {
+		width: 100%;
+		display: block;
+	}
+}
