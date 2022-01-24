@@ -1,6 +1,13 @@
-const { src, dest, watch } = require("gulp"); //Gulp -> Retorna multiples Funciones, por eso las llaves
+const { src, dest, watch, parallel } = require("gulp"); //Gulp -> Retorna multiples Funciones, por eso las llaves
+
+//CSS
+
 const Sass = require("gulp-sass")(require("sass"));
 const plumber = require("gulp-plumber"); //Gulp-sass -> Retorna solo una funcion
+
+// IMAGENES
+
+const webp = require("gulp-webp");
 
 function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
@@ -8,6 +15,16 @@ function css(done) {
 		.pipe(Sass()) //Compilarlo
 		.pipe(dest("../FestivalMusica/build/css")); //Almacenamos en el disco duro
 
+	done();
+}
+
+function versionWebp(done) {
+	const opciones = {
+		quality: 50,
+	};
+	src("../FestivalMusica/src/img/**/*.{png, jpg}")
+		.pipe(webp(opciones)) //pasamos las opciones con la calidad
+		.pipe(dest("../FestivalMusica/build/img")); //Lo almacenamos en el disco duro
 	done();
 }
 
@@ -20,4 +37,5 @@ function dev(done) {
 }
 
 exports.css = css;
-exports.dev = dev;
+exports.versionWebp = versionWebp;
+exports.dev = parallel(versionWebp, dev); //Usamos parallel para ejecutar dos funciones al mismo tiempo
