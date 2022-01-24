@@ -7,7 +7,10 @@ const plumber = require("gulp-plumber"); //Gulp-sass -> Retorna solo una funcion
 
 // IMAGENES
 
+const imagemin = require("gulp-imagemin");
+const cache = require("gulp-cache");
 const webp = require("gulp-webp");
+const avif = require("gulp-avif");
 
 function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
@@ -18,12 +21,32 @@ function css(done) {
 	done();
 }
 
+function imagenes(done) {
+	const opciones = {
+		optimizationLevel: 3,
+	};
+	src("../FestivalMusica/src/img/**/*.{png,jpg}")
+		.pipe(cache(imagemin(opciones))) //Mejoramos la imagenes a una optimizacion de 3
+		.pipe(dest("../FestivalMusica/build/img")); //Almacenamos
+	done();
+}
+
 function versionWebp(done) {
 	const opciones = {
 		quality: 50,
 	};
-	src("../FestivalMusica/src/img/**/*.{png, jpg}")
+	src("../FestivalMusica/src/img/**/*.{png,jpg}")
 		.pipe(webp(opciones)) //pasamos las opciones con la calidad
+		.pipe(dest("../FestivalMusica/build/img")); //Lo almacenamos en el disco duro
+	done();
+}
+
+function versionAvif(done) {
+	const opciones = {
+		quality: 50,
+	};
+	src("../FestivalMusica/src/img/**/*.{png,jpg}")
+		.pipe(avif(opciones)) //pasamos las opciones con la calidad
 		.pipe(dest("../FestivalMusica/build/img")); //Lo almacenamos en el disco duro
 	done();
 }
@@ -37,5 +60,7 @@ function dev(done) {
 }
 
 exports.css = css;
+exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
-exports.dev = parallel(versionWebp, dev); //Usamos parallel para ejecutar dos funciones al mismo tiempo
+exports.versionAvif = versionAvif;
+exports.dev = parallel(imagenes, versionWebp, versionAvif, dev); //Usamos parallel para ejecutar dos funciones al mismo tiempo
