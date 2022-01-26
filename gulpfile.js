@@ -50,17 +50,24 @@ function versionAvif(done) {
 		.pipe(dest("../FestivalMusica/build/img")); //Lo almacenamos en el disco duro
 	done();
 }
+function javaScript(done) {
+	src("../FestivalMusica/src/js/**/*.js") //Identificamos el archivo JS
+		.pipe(dest("../FestivalMusica/build/js"));
+	done();
+}
 
 function dev(done) {
 	// Pasamos el Watch, Este lleva dos parametros
 	// 1ro a que archivo le voy a dar Watch
 	// 2do la funcion a llamar, en este caso -> CSS
 	watch("../FestivalMusica/src/scss/**/*.scss", css);
+	watch("../FestivalMusica/src/js/**/*.js", javaScript);
 	done();
 }
 
 exports.css = css;
+exports.javaScript = javaScript;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
-exports.dev = parallel(imagenes, versionWebp, versionAvif, dev); //Usamos parallel para ejecutar dos funciones al mismo tiempo
+exports.dev = parallel(imagenes, versionWebp, versionAvif, javaScript, dev); //Usamos parallel para ejecutar dos funciones al mismo tiempo
