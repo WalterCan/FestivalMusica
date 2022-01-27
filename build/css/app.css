@@ -713,3 +713,14 @@ img {
   font-weight: 700;
   font-size: 2.5rem;
 }
+
+.side-footer {
+  background-color: #f53756;
+  padding: 2rem;
+}
+.side-footer p {
+  margin: 0;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 700;
+}

@@ -4,6 +4,25 @@ document.addEventListener("DOMContentLoaded", function () {
 // Arrancamos nuestra aplicación
 function iniciarApp() {
 	crearGaleria();
+	// Creamos la funcion para el scroll
+	scrollNav();
+}
+// Creamos el scroll
+function scrollNav() {
+	// Primero vamos a leer los enlaces
+	const enlaces = document.querySelectorAll("navegacion_principal a"); //Llamamos todos los elementos que tengan esa clase y enlaces
+	// Iteramos sobre cada uno de ellos y le asignamos un eventListener, ya que no podemos hacerlo sobre un resultado que trae mas de uno
+	enlaces.forEach((enlace) => {
+		enlace.addEventListener("click", function (e) {
+			// Prevenimos el comportamiento por default que te lleva de golpe a la seccion
+			e.preventDefault();
+			// Detectamos a que le vamos a dar clic
+			const seccionScroll = e.target.attributes.href.value;
+			const seccion = document.querySelector(seccionScroll);
+			// Modificamos el comportamiento
+			seccion.scrollIntoView({ behavior: "smooth" });
+		});
+	});
 }
 // Creamos la Galeria
 function crearGaleria() {
