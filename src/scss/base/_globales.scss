@@ -14,6 +14,13 @@ body {
 	&.fijar-body {
 		overflow: hidden;
 	}
+	&.body-scroll {
+		padding-top: 8.6rem;
+	}
+}
+body ::selection {
+	background-color: v.$rosa;
+	color: v.$blanco;
 }
 p {
 	font-size: 2rem;

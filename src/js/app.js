@@ -3,9 +3,34 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // Arrancamos nuestra aplicación
 function iniciarApp() {
+	// Funcion de Navegacion fija
+
+	navegacionFija();
+
+	// Funcion para crear Galeria
+
 	crearGaleria();
+
 	// Creamos la funcion para el scroll
+
 	scrollNav();
+}
+// Navegacion Fija
+function navegacionFija() {
+	// Seleccionamos las clases
+
+	const barra = document.querySelector(".header");
+	const sobreFestival = document.querySelector(".sobre-festival");
+	const body = document.querySelector("body");
+	window.addEventListener("scroll", function () {
+		if (sobreFestival.getBoundingClientRect().bottom < 0) {
+			barra.classList.add("fijo");
+			body.classList.add("body-scroll");
+		} else {
+			barra.classList.remove("fijo");
+			body.classList.remove("body-scroll");
+		}
+	});
 }
 // Creamos el scroll
 
