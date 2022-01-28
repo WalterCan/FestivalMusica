@@ -4,8 +4,10 @@ const { src, dest, watch, parallel } = require("gulp"); //Gulp -> Retorna multip
 
 const Sass = require("gulp-sass")(require("sass"));
 const plumber = require("gulp-plumber"); //Gulp-sass -> Retorna solo una funcion
-
-// IMAGENES
+// Importamos autoprefixer,  cssnano gulp-postcss y postcss, vamos a mejorar el codigo css
+const autoprefixer = require("autoprefixer"); // que funcione en otros navegadores
+const cssnano = require("cssnano"); // comprimir el codigo Css
+const postcss = require("gulp-postcss"); //Le hace transformacion por medio de los dos anteriores
 
 const imagemin = require("gulp-imagemin");
 const cache = require("gulp-cache");
@@ -16,6 +18,7 @@ function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
 		.pipe(plumber())
 		.pipe(Sass()) //Compilarlo
+		.pipe(postcss([autoprefixer(), cssnano()]))
 		.pipe(dest("../FestivalMusica/build/css")); //Almacenamos en el disco duro
 
 	done();
