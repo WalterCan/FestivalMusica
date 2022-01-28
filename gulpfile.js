@@ -8,6 +8,8 @@ const plumber = require("gulp-plumber"); //Gulp-sass -> Retorna solo una funcion
 const autoprefixer = require("autoprefixer"); // que funcione en otros navegadores
 const cssnano = require("cssnano"); // comprimir el codigo Css
 const postcss = require("gulp-postcss"); //Le hace transformacion por medio de los dos anteriores
+// Agregamos el sourcemaps
+const sourcemaps = require("gulp-sourcemaps");
 
 const imagemin = require("gulp-imagemin");
 const cache = require("gulp-cache");
@@ -16,9 +18,12 @@ const avif = require("gulp-avif");
 
 function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
+		// Agrega el sourcemaps
+		.pipe(sourcemaps.init())
 		.pipe(plumber())
 		.pipe(Sass()) //Compilarlo
 		.pipe(postcss([autoprefixer(), cssnano()]))
+		.pipe(sourcemaps.write("."))
 		.pipe(dest("../FestivalMusica/build/css")); //Almacenamos en el disco duro
 
 	done();
