@@ -16,6 +16,10 @@ const cache = require("gulp-cache");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
 
+// Java Script
+
+const terser = require("gulp-terser-js");
+
 function css(done) {
 	src("../FestivalMusica/src/scss/**/*.scss") //Identificamos el archivo SCSS a compilar
 		// Agrega el sourcemaps
@@ -60,6 +64,9 @@ function versionAvif(done) {
 }
 function javaScript(done) {
 	src("../FestivalMusica/src/js/**/*.js") //Identificamos el archivo JS
+		.pipe(sourcemaps.init())
+		.pipe(terser())
+		.pipe(sourcemaps.write("."))
 		.pipe(dest("../FestivalMusica/build/js"));
 	done();
 }

@@ -32,5 +32,8 @@
 		"node-sass": "^7.0.1",
 		"postcss": "^8.4.5",
 		"sass": "^1.45.1"
+	},
+	"dependencies": {
+		"gulp-terser-js": "^5.2.2"
 	}
 }
